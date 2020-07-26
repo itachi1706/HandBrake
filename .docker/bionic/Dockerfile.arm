@@ -16,4 +16,4 @@ FROM ubuntu:bionic
 
 COPY --from=build /usr/local/bin/HandBrakeCLI /usr/local/bin/HandBrakeCLI
 
-RUN apt-get update && apt-get install -y libass9 libmp3lame0 libvpx5 libtheora0 libvorbis0a libvorbisenc2 libx264-152 libjansson4 libopus0 libspeex1 libnuma1 libturbojpeg0 && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y libass9 libmp3lame0 libvpx5 libtheora0 libvorbis0a libvorbisenc2 libx264-152 libjansson4 libopus0 libspeex1 libnuma1 libturbojpeg && rm -rf /var/lib/apt/lists/*
