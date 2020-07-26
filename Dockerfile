@@ -11,8 +11,6 @@ RUN apt-get install -y python3-pip && pip3 install meson
 ADD . /opt/Handbrake
 WORKDIR /opt/Handbrake
 
-# 1.3.x release latest
-#RUN git tag --list | grep ^1\.3\. && git checkout refs/tags/$(git tag -l | grep -E '^1\.3\.[0-9]+$' | tail -n 1) && echo "Building for $TARGETARCH ($TARGETPLATFORM)"
 RUN echo "Building for $TARGETARCH ($TARGETPLATFORM)"
 
 RUN if [ "$TARGETARCH" = "amd64" ] ; then ./configure --launch-jobs=$(nproc) --launch --disable-gtk ; else ./configure --launch-jobs=$(nproc) --launch --disable-gtk --disable-nvenc --disable-x265 ; fi
