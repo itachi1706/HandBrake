@@ -1,0 +1,65 @@
+name: 'Docker Releases (Master)'
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    name: Latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Login to DockerHub
+        env:
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        run: echo "${DOCKER_PASSWORD}" | docker login --username ${DOCKER_USERNAME} --password-stdin
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: crazy-max/ghaction-docker-buildx@v3.2.0
+        with:
+          buildx-version: latest
+          qemu-version: latest
+      - name: Build and push docker image
+        run: docker buildx build --platform=linux/amd64,linux/arm/v7,linux/arm64,linux/arm/v6 --output "type=image,push=true" --file ./Dockerfile . --tag itachi1706/handbrake-multiarch
+  bionic:
+    runs-on: ubuntu-latest
+    name: Ubuntu 18.04 LTS (Bionic)
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Login to DockerHub
+        env:
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        run: echo "${DOCKER_PASSWORD}" | docker login --username ${DOCKER_USERNAME} --password-stdin
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: crazy-max/ghaction-docker-buildx@v3.2.0
+        with:
+          buildx-version: latest
+          qemu-version: latest
+      - name: Build and push docker image
+        run: docker buildx build --platform=linux/amd64,linux/arm/v7,linux/arm64,linux/arm/v6 --output "type=image,push=true" --file ./.docker/bionic/Dockerfile . --tag itachi1706/handbrake-multiarch:bionic
+#  alpine:
+#    runs-on: ubuntu-latest
+#    name: Alpine Linux
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v1
+#      - name: Login to DockerHub
+#        env:
+#          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+#          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+#       run: echo "${DOCKER_PASSWORD}" | docker login --username ${DOCKER_USERNAME} --password-stdin
+#      - name: Set up Docker Buildx
+#        id: buildx
+#        uses: crazy-max/ghaction-docker-buildx@v3.2.0
+#        with:
+#          buildx-version: latest
+#          qemu-version: latest
+#      - name: Build and push docker image
+#        run: docker buildx build --platform=linux/amd64,linux/arm/v7,linux/arm64,linux/arm/v6 --output "type=image,push=true" --file ./.docker/alpine/Dockerfile . --tag itachi1706/handbrake-multiarch:alpine

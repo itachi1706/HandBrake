@@ -1,0 +1,18 @@
+FROM ubuntu:bionic AS build
+
+RUN apt-get update && apt-get install -y autoconf automake autopoint build-essential cmake git libass-dev libbz2-dev libfontconfig1-dev libfreetype6-dev libfribidi-dev libharfbuzz-dev libjansson-dev liblzma-dev libmp3lame-dev libnuma-dev libogg-dev libopus-dev libsamplerate-dev libspeex-dev libtheora-dev libtool libtool-bin libturbojpeg0-dev libvorbis-dev libx264-dev libxml2-dev libvpx-dev m4 make nasm ninja-build patch pkg-config python tar zlib1g-dev
+RUN apt-get install -y python3-pip && pip3 install meson
+
+ADD . /opt/Handbrake
+WORKDIR /opt/Handbrake
+
+RUN ./configure --launch-jobs=$(nproc) --launch --disable-gtk
+RUN make --directory=build install
+
+FROM ubuntu:bionic
+
+COPY --from=build /usr/local/bin/HandBrakeCLI /usr/local/bin/HandBrakeCLI
+
+RUN apt-get update && apt-get install -y libass9 libmp3lame0 libvpx5 libtheora0 libvorbis0a libvorbisenc2 libx264-152 libjansson4 libopus0 libspeex1 libnuma1 libturbojpeg libnvidia-encode-440 && rm -rf /var/lib/apt/lists/*
+
+CMD ["HandBrakeCLI", "--version"]
