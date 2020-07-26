@@ -26,3 +26,5 @@ ARG TARGETARCH
 RUN apt-get update && apt-get install -y libass9 libmp3lame0 libvpx5 libtheora0 libvorbis0a libvorbisenc2 libx264-152 libjansson4 libopus0 libspeex1 libnuma1 libturbojpeg && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update && if [ "$TARGETARCH" = "amd64" ] ; then apt-get install -y libnvidia-encode-440 ; fi && rm -rf /var/lib/apt/lists/* 
+
+CMD ["HandBrakeCLI", "--version"]
