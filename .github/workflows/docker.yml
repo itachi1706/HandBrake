@@ -24,7 +24,7 @@ jobs:
           buildx-version: latest
           qemu-version: latest
       - name: Build and push docker image
-        run: docker buildx build --platform=linux/amd64,linux/arm/v7,linux/arm64,linux/arm/v6 --output "type=image,push=true" --file ./Dockerfile . --tag itachi1706/handbrake-multiarch
+        run: docker buildx build --platform=linux/amd64,linux/arm/v7,linux/arm64,linux/arm/v6,linux/arm --output "type=image,push=true" --file ./Dockerfile . --tag itachi1706/handbrake-multiarch
   bionic:
     runs-on: ubuntu-latest
     name: Ubuntu 18.04 LTS (Bionic)
@@ -43,7 +43,7 @@ jobs:
           buildx-version: latest
           qemu-version: latest
       - name: Build and push docker image
-        run: docker buildx build --platform=linux/amd64,linux/arm/v7,linux/arm64,linux/arm/v6 --output "type=image,push=true" --file ./.docker/bionic/Dockerfile . --tag itachi1706/handbrake-multiarch:bionic
+        run: docker buildx build --platform=linux/amd64,linux/arm/v7,linux/arm64,linux/arm/v6,linux/arm --output "type=image,push=true" --file ./.docker/bionic/Dockerfile . --tag itachi1706/handbrake-multiarch:latest-bionic
 #  alpine:
 #    runs-on: ubuntu-latest
 #    name: Alpine Linux
