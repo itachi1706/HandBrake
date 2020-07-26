@@ -17,3 +17,5 @@ ENV DEBIAN_FRONTEND noninteractive
 COPY --from=build /usr/local/bin/HandBrakeCLI /usr/local/bin/HandBrakeCLI
 
 RUN apt-get update && apt-get install -y libass9 libmp3lame0 libvpx6 libtheora0 libvorbis0a libvorbisenc2 libx264-155 libjansson4 libopus0 libspeex1 libnuma1 libturbojpeg libnvidia-encode-440 && rm -rf /var/lib/apt/lists/*
+
+CMD ["HandBrakeCLI", "--version"]

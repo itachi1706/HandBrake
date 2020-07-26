@@ -17,3 +17,5 @@ FROM alpine
 COPY --from=build /usr/local/bin/HandBrakeCLI /usr/local/bin/HandBrakeCLI
 
 RUN apk add --no-cache jansson lame libass libjpeg-turbo libstdc++ libtheora libvorbis libvpx libxml2 numactl opus speex x264-dev
+
+CMD ["HandBrakeCLI", "--version"]
