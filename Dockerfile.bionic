@@ -9,7 +9,7 @@ WORKDIR /opt/Handbrake
 # 1.3.x release latest
 RUN git tag --list | grep ^1\.3\. && git checkout refs/tags/$(git tag -l | grep -E '^1\.3\.[0-9]+$' | tail -n 1)
 
-RUN ./configure --launch-jobs=$(nproc) --launch --disable-gtk --disable-nvenc
+RUN ./configure --launch-jobs=$(nproc) --launch --disable-gtk --disable-nvenc --disable-x265
 RUN make --directory=build install
 
 FROM ubuntu:bionic
