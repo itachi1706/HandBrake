@@ -15,4 +15,12 @@ COPY --from=build /usr/local/bin/HandBrakeCLI /usr/local/bin/HandBrakeCLI
 
 RUN apt-get update && apt-get install -y libass9 libmp3lame0 libvpx5 libtheora0 libvorbis0a libvorbisenc2 libx264-152 libjansson4 libopus0 libspeex1 libnuma1 libturbojpeg && rm -rf /var/lib/apt/lists/*
 
-CMD ["HandBrakeCLI", "--version"]
+# Custom handling done here
+RUN mkdir -p /in && mkdir -p /out && mkdir -p /settings
+ADD .docker/custom/Fast_1080p30.json /settings/preset.json
+ADD .docker/custom/start.sh /start.sh
+RUN chmod +x /start.sh
+
+WORKDIR /
+
+CMD start.sh
