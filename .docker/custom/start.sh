@@ -1,7 +1,7 @@
 #! /bin/bash
 
 cd /in
-NUMFILES = $(ls *.mp4 | wc -l)
+NUMFILES = $(ls -R *.mp4 | wc -l)
 NUM=1
 for i in $(find . -name *.mp4 -type f -print0 | xargs -0)
 do
