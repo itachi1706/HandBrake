@@ -7,6 +7,8 @@ if [ $ARCH != 'armv7l' ]
 then
     echo "Detected Architecture $ARCH is not expected (expecting armv7l). Please make sure you are running this on a Raspberry PI. Script will now exit"
     exit 1
+else
+    echo "Detected Architecture $ARCH. System checks complete"
 fi
 
 echo "Generating Raspberry PI Images. Make sure you are logged into DockerHub"
