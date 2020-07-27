@@ -1,5 +1,25 @@
 # HandBrake [![macOS Build](https://github.com/HandBrake/HandBrake/workflows/macOS%20build/badge.svg)](https://github.com/HandBrake/HandBrake/actions?query=workflow%3A%22macOS+build%22) [![Windows Build](https://github.com/HandBrake/HandBrake/workflows/Windows%20Build/badge.svg)](https://github.com/HandBrake/HandBrake/actions?query=workflow%3A%22Windows+Build%22) [![Linux Build](https://github.com/HandBrake/HandBrake/workflows/Linux%20Build/badge.svg)](https://github.com/HandBrake/HandBrake/actions?query=workflow%3A%22Linux+Build%22)
 
+## Docker Images  
+**Note: arm images does not contain NVENC or H.265 encoding**  
+There are 4 types of images right now:  
+* bionic - Based off Ubuntu 18.04 Bionic, supports full multi-arch images
+* focal - Based off Ubuntu 20.04 Focal, currently only supports x86. ARM support coming soon
+* alpine - Based off Alpine Linux, current only supports x86. ARM support coming soon
+* batch - Based off the bionic images but adds in batch support (see below)  
+
+### Docker Batch support
+Basic usage for batch support is through here. /path/to/in is where you place your ingress videos and /path/to/out is where you get the converted videos  
+```bash
+docker run -v /path/to/in:/in -v /path/to/out:/out itachi1706/handbrake-multiarch:batch-bionic-rpi-armv7l
+```
+
+should you wish to actually define your own preset, you can do so by naming the preset "preset.json" in /path/to/settings, then run this bash command instead
+```bash
+docker run -v /path/to/in:/in -v /path/to/out:/out -v /path/to/settings:/settings itachi1706/handbrake-multiarch:batch-bionic-rpi-armv7l
+```
+
+## Software Information
 
 HandBrake is an open-source video transcoder available for Linux, Mac, and Windows, licensed under the [GNU General Public License (GPL) Version 2](LICENSE).
 

@@ -44,6 +44,25 @@ jobs:
           qemu-version: latest
       - name: Build and push docker image
         run: docker buildx build --platform=linux/amd64,linux/arm/v7,linux/arm64,linux/arm/v6 --output "type=image,push=true" --file ./.docker/bionic/Dockerfile . --tag itachi1706/handbrake-multiarch:latest-bionic
+  custom:
+    runs-on: ubuntu-latest
+    name: Batch Videos (Bionic)
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Login to DockerHub
+        env:
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        run: echo "${DOCKER_PASSWORD}" | docker login --username ${DOCKER_USERNAME} --password-stdin
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: crazy-max/ghaction-docker-buildx@v3.2.0
+        with:
+          buildx-version: latest
+          qemu-version: latest
+      - name: Build and push docker image
+        run: docker buildx build --platform=linux/amd64,linux/arm/v7,linux/arm64,linux/arm/v6 --output "type=image,push=true" --file ./.docker/custom/Dockerfile . --tag itachi1706/handbrake-multiarch:batch-bionic
 #  alpine:
 #    runs-on: ubuntu-latest
 #    name: Alpine Linux
