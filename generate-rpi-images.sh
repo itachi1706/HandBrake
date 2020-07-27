@@ -3,7 +3,7 @@
 # For Raspberry PI use only. Please make sure you are running on an raspberry pi
 echo "Checking system..."
 ARCH=$(uname -m)
-if [ '$ARCH' != 'armv7l' ]
+if [ $ARCH != 'armv7l' ]
 then
     echo "Detected Architecture $ARCH is not expected (expecting armv7l). Please make sure you are running this on a Raspberry PI. Script will now exit"
     exit 1
