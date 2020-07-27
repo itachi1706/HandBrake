@@ -35,4 +35,4 @@ RUN chmod +x /start.sh
 
 WORKDIR /
 
-CMD start.sh
+CMD ./start.sh
