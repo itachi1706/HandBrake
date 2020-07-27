@@ -19,6 +19,7 @@ should you wish to actually define your own preset, you can do so by naming the 
 docker run -v /path/to/in:/in -v /path/to/out:/out -v /path/to/settings:/settings itachi1706/handbrake-multiarch:batch-bionic-rpi-armv7l
 ```
 
+## Software Information
 
 HandBrake is an open-source video transcoder available for Linux, Mac, and Windows, licensed under the [GNU General Public License (GPL) Version 2](LICENSE).
 
