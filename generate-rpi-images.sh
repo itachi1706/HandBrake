@@ -14,4 +14,8 @@ echo "Generating Bionic image"
 docker build -f .docker/bionic/Dockerfile.arm -t itachi1706/handbrake-multiarch:bionic-rpi-armv7l .
 docker push itachi1706/handbrake-multiarch:bionic-rpi-armv7l
 
+echo "Generating Custom Bionic Batch image"
+docker build -f .docker/custom/Dockerfile.arm -t itachi1706/handbrake-multiarch:batch-bionic-rpi-armv7l .
+docker push itachi1706/handbrake-multiarch:batch-bionic-rpi-armv7l
+
 echo "Raspberry PI Images complete"
