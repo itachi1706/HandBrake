@@ -13,3 +13,10 @@ do
 done
 
 echo "Handbrake Processing of Videos completed"
+
+echo "Fixing Permissions..."
+cd /out
+chown -R 1000:1000 .
+echo "All permissions fixed"
+
+echo "Handbrake Batch encoding completed
